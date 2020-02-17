@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
     public void randomLottery(int count) {
         // Initialize TextView for numbers
         tvResult.setText("");
-        // Initialize TextView for validation
-        tvValidation.setText("");
 
         Random random = new Random();
 
