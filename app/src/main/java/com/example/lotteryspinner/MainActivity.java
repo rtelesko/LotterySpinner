@@ -12,13 +12,13 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Constants for tip systems
+    static final int EUROMILLIONS_NUMBERS = 5;
+    static final int SWISSLOTTERY_NUMBERS = 6;
     // GUI controls
     private TextView tvResult;
     private TextView tvValidation;
     private Spinner spType;
-
-    static final int EUROMILLIONS_NUMBERS = 5;
-    static final int SWISSLOTTERY_NUMBERS = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +46,11 @@ public class MainActivity extends AppCompatActivity {
         tvResult.setText("");
         // Initialize TextView for validation
         tvValidation.setText("");
-        // Arrays for lottery numbers
-        int[] numbersSwiss = new int[SWISSLOTTERY_NUMBERS];
-        int[] numbersEuro = new int[EUROMILLIONS_NUMBERS];
 
         Random random = new Random();
 
         if (count == SWISSLOTTERY_NUMBERS) {
+            int[] numbersSwiss = new int[SWISSLOTTERY_NUMBERS];
             for (int i = 0; i < SWISSLOTTERY_NUMBERS; i++) {
                 numbersSwiss[i] = random.nextInt(42) + 1;
                 tvResult.append(numbersSwiss[i] + "  ");
@@ -67,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         } else {
+            int[] numbersEuro = new int[EUROMILLIONS_NUMBERS];
             for (int i = 0; i < EUROMILLIONS_NUMBERS; i++) {
                 numbersEuro[i] = random.nextInt(50) + 1;
                 tvResult.append(numbersEuro[i] + "  ");
@@ -85,13 +84,12 @@ public class MainActivity extends AppCompatActivity {
 
     // Check for duplicates in array
     private boolean validationCheck(int[] numbers) {
-        boolean valid = true;   // initial setting
         for (int i = 0; i < numbers.length; i++) {
             for (int j = i + 1; j < numbers.length; j++) {
                 if (numbers[i] == numbers[j])
-                    valid = false;  // got a duplicate element
+                    return false;  // Not valid: Got a duplicate element
             }
         }
-        return valid;
+        return true;    // Valid tip
     }
 }
